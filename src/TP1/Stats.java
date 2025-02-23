@@ -17,19 +17,23 @@ public class Stats {
     }
 
     public static Etudiant trouverMax(List<Etudiant> etudiants) {
-    	
-    	return Collections.max(etudiants, new EtudiantComparator());
+        if (etudiants.isEmpty()) return null; // Évite l'exception si la liste est vide
+        return Collections.max(etudiants, new CompareMoyenne()); // Utilise CompareMoyenne
     }
 
     public static Etudiant trouverMin(List<Etudiant> etudiants) {
-        return Collections.min(etudiants, new EtudiantComparator());
+        if (etudiants.isEmpty()) return null;
+        return Collections.min(etudiants, new CompareMoyenne()); 
     }
 
     public static Note getMeilleureNote(Etudiant etudiant) {
+        if (etudiant.getNotes().isEmpty()) return null; 
         return Collections.max(etudiant.getNotes(), new NoteComparator());
     }
 
     public static Note getMoinsBonneNote(Etudiant etudiant) {
-        return Collections.min(etudiant.getNotes(),new NoteComparator());
+        if (etudiant.getNotes().isEmpty()) return null; 
+        return Collections.min(etudiant.getNotes(), new NoteComparator());
     }
 }
+

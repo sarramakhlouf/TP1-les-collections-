@@ -2,10 +2,10 @@ package TP1;
 
 import java.util.Comparator;
 
-public class NoteComparator implements Comparator<Note>{
-	@Override
-	public int compare(Note no1, Note no2) {
-	     return Double.compare(no1.getValue(), no2.getValue());
-	}
-
+class NoteComparator implements Comparator<Note> {
+    @Override
+    public int compare(Note n1, Note n2) {
+        return Float.compare(n1.getValeur(), n2.getValeur());
+    }
 }
+

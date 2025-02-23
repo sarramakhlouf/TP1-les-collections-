@@ -1,25 +1,14 @@
 package TP1;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.List;
 
-public class Etudiant implements Statisticable, Comparator<Etudiant>{
-	private String matricule;
-	private String nom;
-	private ArrayList<Note> notes;
-	
-	public Etudiant (String mat, String name) {
-		this.matricule = mat;
-		this.nom = name;
-		this.notes = new ArrayList<>();
-	}
+class Etudiant implements Statisticable, Comparable<Etudiant> {
+    private String matricule;
+    private String nom;
+    private List<Note> notes;
 
-	@Override
-	public String toString() {
-		return "Etudiant [matricule=" + matricule + ", nom=" + nom + ", notes=" + notes + "]";
-	}
-
-	public String getMatricule() {
+    public String getMatricule() {
 		return matricule;
 	}
 
@@ -35,32 +24,41 @@ public class Etudiant implements Statisticable, Comparator<Etudiant>{
 		this.nom = nom;
 	}
 
-	public ArrayList<Note> getNotes() {
-		return notes;
-	}
-
-	public void setNotes(ArrayList<Note> notes) {
+	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
-	@Override
-	public double getValue() {
-	    if (notes.isEmpty()) {
-	        return 0;
-	    }
-	    double somme = 0.0;
-	    for (int i = 0; i < notes.size(); i++) {
-	        somme += notes.get(i).getValue();
-	    }
-	    return somme / notes.size();
-	}
 
-	public void addNote(Note note) {
-        this.notes.add(note);
+	public Etudiant(String matricule, String nom) {
+        this.matricule = matricule;
+        this.nom = nom;
+        this.notes = new ArrayList<>();
     }
-	
-	@Override
-	public int compare(Etudiant e1, Etudiant e2) {
-	     return Double.compare(e1.getValue(), e2.getValue());
-	}
 
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    @Override
+    public float getValue() {
+        if (notes.isEmpty()) return 0;
+        float somme = 0;
+        for (Note note : notes) {
+            somme += note.getValeur();
+        }
+        return somme / notes.size();
+    }
+
+    @Override
+    public int compareTo(Etudiant autre) {
+        return this.matricule.compareTo(autre.matricule);
+    }
+
+    @Override
+    public String toString() {
+        return matricule + " - " + nom + " (Moyenne: " + getValue() + ")";
+    }
 }
