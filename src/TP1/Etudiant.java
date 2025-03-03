@@ -57,8 +57,10 @@ class Etudiant implements Statisticable, Comparable<Etudiant> {
         return this.matricule.compareTo(autre.matricule);
     }
 
-    @Override
-    public String toString() {
-        return matricule + " - " + nom + " (Moyenne: " + getValue() + ")";
-    }
+	@Override
+	public String toString() {
+		return "Etudiant [matricule=" + matricule + ", nom=" + nom + ", notes=" + notes + "]";
+	}
+
+    
 }
